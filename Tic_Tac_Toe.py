@@ -29,7 +29,7 @@ def Taken(matrix,position,us,enemy):
             matrix[column][row]=enemy
             return 1
     else:
-        return 0   
+        return 0
 def Condition(position):
     i=position//3
     j=position%3
@@ -101,21 +101,13 @@ def Chances(br,position,us,enemy,matrix):
                 [0,0,0],
                 [5,0,5]]
     if matrix[1][1]=='X' and enemy=='X' and matrix[0][0]=='O':
-        points=[[5,0,5],
-                [0,0,0],
-                [5,0,6]]
+        points[2][2]=6
     elif matrix[1][1]=='X' and enemy=='X' and matrix[2][2]=='O':
-        points=[[6,0,5],
-                [0,0,0],
-                [5,0,5]]
+        points[0][0]=6
     elif matrix[1][1]=='X' and enemy=='X' and matrix[2][0]=='O':
-        points=[[5,0,6],
-                [0,0,0],
-                [5,0,5]]
+        points[0][2]=6
     elif matrix[1][1]=='X' and enemy=='X' and matrix[0][2]=='O':
-        points=[[5,0,5],
-                [0,0,0],
-                [6,0,5]]
+        points[2][0]=6
     if matrix[1][1]=='O' and enemy=='O':
         points=[[2,0,2],
                 [0,0,0],
