@@ -207,81 +207,60 @@ def Decision(br,matrix,us,enemy):
         for k in range(3):
             position=Chances(br,position,us,enemy,matrix)
             return position
-#Start from the user's perspective
+def Outcome(position,br,enemy,matrix,Result):
+            if Condition(position)==2:
+                Result=1
+                print("Le Draw! Both sides performed well")
+            elif Condition(position)!=0:
+                if(enemy=='X'):
+                    print("player 1 won! Thanks for playing-")
+                else:
+                    print("player 2 won! Thanks for playing-")
+                Result=1
+            else:
+                print("The battle goes on. . .")
+            return Result
+def Out(position,Result,enemy):
+    os.system('cls')
+    clearConsole()
+    Board()
+    if Condition(position)==2:
+        Result=1
+        print("Le Draw! Both sides performed well")
+    elif Condition(position)!=0: 
+        if(br%2==0 or enemy=='X'):
+            print("player 1 won! Thanks for playing-")
+        else:
+            print("player 2 won! Thanks for playing-")
+        Result=1
+    else:
+        print("The battle goes on. . .")
+    return Result
 c=int(input("Do you want to play versus human or A.I. : 1-Human 2-A.I. "))
 if c==2 :
     br=int(input("Which one goes first?: 1-You 2-A.I. "))
     if(br%2==0):
         us='O'
         enemy='X'
-    
     while(Result==0):
         if(br%2==0):
             position=Decision(br,matrix,us,enemy)
             br+=1
             if(Taken(matrix,position,us,enemy)==0):
                 br+=1
-            else:
-                os.system('cls')
-                clearConsole()
-                Board()
-            if Condition(position)==2:
-                    Result=1
-                    print("Le Draw! Both sides performed well")
-            elif Condition(position)!=0: 
-                if(br%2==0):
-                    print("player 1 won! Thanks for playing-")
-                else:
-                    print("player 2 won! Thanks for playing-")
-                Result=1
-            else:
-                print("The battle goes on. . .")
+            Result=Out(position,Result,enemy)
         else:
-            position=int(input("Choose marking position[1-9]: "))
-            position=position-1
+            position=int(input("Choose marking position[1-9]: "))-1
             br+=1
-            os.system('cls')
-            clearConsole()
             if(Taken(matrix,position,us,enemy)==0):
                 br+=1
-                os.system('cls')
-                clearConsole()
-                print("This position is already taken, champ :)")
-            Board()
-            if Condition(position)==2:
-                    Result=1
-                    print("Le Draw! Both sides performed well")
-            elif Condition(position)!=0:
-                if(br%2==0):
-                    print("player 1 won! Thanks for playing-")
-                else:
-                    print("player 2 won! Thanks for playing-")
-                Result=1
-            else:
-                print("The battle goes on. . .")
+            Result=Out(position,Result,enemy)
 #Broqch za sledene na hodovete
 elif c==1:
     while(Result==0):
-        position=int(input("Choose marking position[1-9]: "))
-        position=position-1
+        position=int(input("Choose marking position[1-9]: "))-1
         br+=1
         if(Taken(matrix,position,us,enemy)==0):
             br+=1
-            os.system('cls')
-            clearConsole()
             print("This position is already taken, champ :)")
-        
-        os.system('cls')
-        clearConsole()
-        Board()
-        if Condition(position)==2:
-                    Result=1
-                    print("Le Draw! Both sides performed well")
-        elif Condition(position)!=0: 
-            if(br%2==0):
-                print("player 1 won! Thanks for playing-")
-            else:
-                print("player 2 won! Thanks for playing-")
-            Result=1
-        else:
-            print("The battle goes on. . .")
+        Result=Out(position,Result,enemy)
